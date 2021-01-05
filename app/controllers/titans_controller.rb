@@ -24,7 +24,7 @@ class TitansController < ApplicationController
     end
   end
 
-  # PATCH/PUT /titans/1
+  # PATCH/PUT /titans/:id
   def update
     if @titan.update(titan_params)
       render json: @titan
@@ -33,19 +33,19 @@ class TitansController < ApplicationController
     end
   end
 
-  # DELETE /titans/1
+  # DELETE /titans/:id
   def destroy
     @titan.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Standard method to find a specific instance of a titan by its id.
     def set_titan
       @titan = Titan.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # Strong params. Requires the titan model. Allow attributes white listed here. Only allow a trusted parameter "white list" through.
     def titan_params
-      params.require(:titan).permit(:nickname, :size, :image_src, :details)
+      params.require(:titan).permit(:nickname, :tclass, :size, :image_src, :details)
     end
 end
