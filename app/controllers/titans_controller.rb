@@ -36,6 +36,7 @@ class TitansController < ApplicationController
   # DELETE /titans/:id
   def destroy
     @titan.destroy
+    render json: {message: "Deleted successfully"}
   end
 
   private
