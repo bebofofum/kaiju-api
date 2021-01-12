@@ -3,14 +3,18 @@ class SightingsController < ApplicationController
 
   # GET /sightings
   def index
-    @sightings = Sighting.all
+    if params[:titan_id]
+      @sightings = Titan.find_by_id(params[:titan_id]).sightings
+    else
+      @sightings = Sighting.all
+    end
 
     render json: @sightings
   end
 
   # GET /sightings/1
   def show
-    render json: @sighting
+    render json: { id: @sighting.id, titan: @sighting.titan, location: @sighting.location }
   end
 
   # POST /sightings
@@ -46,6 +50,6 @@ class SightingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def sighting_params
-      params.require(:sighting).permit(:location, :sighting_event, :titans)
+      params.require(:sighting).permit(:location, :sighting_event, :titan_id)
     end
 end
