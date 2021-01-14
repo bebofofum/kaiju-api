@@ -1,3 +1,3 @@
 class Titan < ApplicationRecord
-    has_many :sightings
+    has_many :sightings, dependent: :destroy
 end
