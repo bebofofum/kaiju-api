@@ -16,10 +16,21 @@ class SightingsController < ApplicationController
   def show
     render json: { id: @sighting.id, titan: @sighting.titan, location: @sighting.location }
   end
+  
+  # GET /sightings/new
+  def new
+    @titan = Titan.find_by_id(params[:titan_id])
+    if @titan
+      @sighting = @titan.sightings.build
+    else
+      @sighting = Sighting.new
+    end
+  end
 
   # POST /sightings
   def create
     @sighting = Sighting.new(sighting_params)
+    # byebug
 
     if @sighting.save
       render json: @sighting, status: :created, location: @sighting
