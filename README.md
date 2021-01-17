@@ -7,4 +7,4 @@ has_many :sightings
 * Sighting model
 belongs_to :titan
 
-
+Adding Validations to Models
