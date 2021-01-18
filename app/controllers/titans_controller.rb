@@ -20,7 +20,7 @@ class TitansController < ApplicationController
     if @titan.save
       render json: @titan, status: :created, location: @titan
     else
-      render json: @titan.errors, status: :unprocessable_entity
+      render json: @titan.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
   end
 
